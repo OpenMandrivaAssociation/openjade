@@ -1,6 +1,7 @@
 %define name openjade
-%define version 1.3.2
-%define release %mkrel 13
+%define version 1.3.3
+%define prerel pre1
+%define release %mkrel 0.%prerel.1
 %define sgmlbase %{_datadir}/sgml
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -11,10 +12,10 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Url: http://openjade.sourceforge.net/
-Source: http://download.sourceforge.net/openjade/openjade-%{version}.tar.bz2
+Source: http://download.sourceforge.net/openjade/openjade-%{version}-%prerel.tar.bz2
 # (gb) 1.3.2-12mdk libtool fixes, don't bother with either aclocal nor autoconf
 # NOTE: this directly applies to configure
-Patch0: openjade-1.3.2-libtool.patch.bz2
+Patch0: openjade-1.3.2-libtool.patch
 
 License: BSD
 Group: Publishing
@@ -49,7 +50,7 @@ Files for development from the openjade package.
 
 %prep
 
-%setup -q
+%setup -q -n %name-%version-%prerel
 %patch0 -p1 -b .libtool
 
 %build
@@ -89,7 +90,7 @@ install generic/*.h $RPM_BUILD_ROOT%{_includedir}/sp/generic/
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/sp/include/
 cp dsssl/builtins.dsl dsssl/catalog $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/
 install pubtext/* $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/pubtext
-install unicode/* $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/unicode
+#install unicode/* $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/unicode
 cp dsssl/dsssl.dtd dsssl/style-sheet.dtd dsssl/fot.dtd $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/
 
 cd $RPM_BUILD_ROOT%{sgmlbase}
@@ -172,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc doc/ jadedoc/ dsssl/ pubtext/ unicode/ README VERSION
+%doc doc/ jadedoc/ dsssl/ pubtext/  README VERSION
 %ghost %config(noreplace) %{_sysconfdir}/sgml/dsssl*.cat
 %ghost %config(noreplace) %{_sysconfdir}/sgml/catalog
 %{_bindir}/*
