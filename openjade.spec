@@ -7,7 +7,7 @@
 %define libname %mklibname %{name} %{major}
 %define libnamedev %mklibname %{name} %{major} -d
 
-Summary: Jade and SP -- parser and tools for SGML + DSSSL
+Summary: Parser and tools for SGML + DSSSL
 Name: %{name}
 Version: %{version}
 Release: %{release}
