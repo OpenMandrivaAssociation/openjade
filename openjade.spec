@@ -19,7 +19,6 @@ Patch0: openjade-1.3.2-libtool.patch
 
 License: BSD
 Group: Publishing
-BuildRoot: %{_tmppath}/%{name}-buildroot
 Obsoletes: jade
 Provides: jade = %version-%release
 PreReq: sgml-common >= 0.6.3-8mdk, %libname = %version-%release
