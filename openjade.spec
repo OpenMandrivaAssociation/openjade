@@ -1,7 +1,7 @@
 %define name openjade
 %define version 1.3.3
 %define prerel pre1
-%define release %mkrel 0.%prerel.3
+%define release %mkrel 0.%prerel.4
 %define sgmlbase %{_datadir}/sgml
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -22,7 +22,7 @@ Group: Publishing
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Obsoletes: jade
 Provides: jade = %version-%release
-PreReq: sgml-common >= 0.6.3-8mdk, %libname = %version-%release
+Requires: sgml-common >= 0.6.3-8mdk, %libname = %version-%release
 BuildRequires: OpenSP-devel
 Requires: OpenSP
 
@@ -41,7 +41,7 @@ Shared library files for openjade.
 %package -n %libnamedev
 Group:          Development/C
 Summary:        Development files for openjade
-PreReq:       %name = %version-%release, %libname = %version-%release
+Requires:       %name = %version-%release, %libname = %version-%release
 Provides:       lib%{name}-devel, openjade-devel
 
 %description -n %libnamedev
