@@ -1,7 +1,7 @@
 %define name openjade
 %define version 1.3.3
 %define prerel pre1
-%define release %mkrel 0.%prerel.4
+%define release %mkrel 0.%prerel.5
 %define sgmlbase %{_datadir}/sgml
 %define major 0
 %define libname %mklibname %{name} %{major}
@@ -16,7 +16,9 @@ Source: http://download.sourceforge.net/openjade/openjade-%{version}-%prerel.tar
 # (gb) 1.3.2-12mdk libtool fixes, don't bother with either aclocal nor autoconf
 # NOTE: this directly applies to configure
 Patch0: openjade-1.3.2-libtool.patch
-
+Patch1: openjade-gcc43.diff
+Patch2: openjade-deplibs.patch
+Patch3: openjade-ppc64.patch
 License: BSD
 Group: Publishing
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -52,6 +54,9 @@ Files for development from the openjade package.
 
 %setup -q -n %name-%version-%prerel
 %patch0 -p1 -b .libtool
+%patch1 -p1 -b .gcc43
+%patch2 -p1
+%patch3 -p1
 
 %build
 cp config/configure.in .
