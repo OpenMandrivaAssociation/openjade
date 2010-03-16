@@ -1,7 +1,7 @@
 %define name openjade
 %define version 1.3.3
 %define prerel pre1
-%define release %mkrel 0.%prerel.7
+%define release %mkrel 0.%prerel.8
 %define sgmlbase %{_datadir}/sgml
 %define major 0
 %define libname %mklibname %{name} %{major}
