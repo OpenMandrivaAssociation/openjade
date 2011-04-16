@@ -60,6 +60,7 @@ Files for development from the openjade package.
 
 %build
 cp config/configure.in .
+export CXXFLAGS="%optflags -fpermissive"
 %configure2_5x --enable-static --enable-http \
  --enable-default-catalog=%{_sysconfdir}/sgml/catalog  \
  --enable-default-search-path=%{sgmlbase} \
