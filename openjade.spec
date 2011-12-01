@@ -76,31 +76,31 @@ export CXXFLAGS="%optflags -fpermissive"
 # would be for James Clark to tell us what the appropriate list of
 # files to be included is.
 
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != / ] && rm -rf $RPM_BUILD_ROOT
+[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
-mkdir -p $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/sp/generic,%{_includedir}/sp/include,%{_includedir}/sp/lib}
-mkdir -p $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/{pubtext,unicode}
+mkdir -p %{buildroot}{%{_libdir},%{_bindir},%{_includedir}/sp/generic,%{_includedir}/sp/include,%{_includedir}/sp/lib}
+mkdir -p %{buildroot}%{sgmlbase}/%{name}-%{version}/{pubtext,unicode}
 
-%makeinstall install-man datadir=$RPM_BUILD_ROOT/%{sgmlbase}
+%makeinstall install-man datadir=%{buildroot}/%{sgmlbase}
 
 # Why do this file gets installed here ???
-rm -f $RPM_BUILD_ROOT%{sgmlbase}/builtins.dsl
+rm -f %{buildroot}%{sgmlbase}/builtins.dsl
 
 # oMy, othis ois osilly.
-ln -s openjade $RPM_BUILD_ROOT/%{_bindir}/jade
+ln -s openjade %{buildroot}/%{_bindir}/jade
 for file in nsgmls sgmlnorm spam spent sx ; do
-  ln -s o$file $RPM_BUILD_ROOT/%{_bindir}/$file
+  ln -s o$file %{buildroot}/%{_bindir}/$file
 done
 
-mv $RPM_BUILD_ROOT%{_bindir}/sx $RPM_BUILD_ROOT%{_bindir}/sgml2xml
-install generic/*.h $RPM_BUILD_ROOT%{_includedir}/sp/generic/
-install include/*.h $RPM_BUILD_ROOT%{_includedir}/sp/include/
-cp dsssl/builtins.dsl dsssl/catalog $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/
-install pubtext/* $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/pubtext
-#install unicode/* $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/unicode
-cp dsssl/dsssl.dtd dsssl/style-sheet.dtd dsssl/fot.dtd $RPM_BUILD_ROOT%{sgmlbase}/%{name}-%{version}/
+mv %{buildroot}%{_bindir}/sx %{buildroot}%{_bindir}/sgml2xml
+install generic/*.h %{buildroot}%{_includedir}/sp/generic/
+install include/*.h %{buildroot}%{_includedir}/sp/include/
+cp dsssl/builtins.dsl dsssl/catalog %{buildroot}%{sgmlbase}/%{name}-%{version}/
+install pubtext/* %{buildroot}%{sgmlbase}/%{name}-%{version}/pubtext
+#install unicode/* %{buildroot}%{sgmlbase}/%{name}-%{version}/unicode
+cp dsssl/dsssl.dtd dsssl/style-sheet.dtd dsssl/fot.dtd %{buildroot}%{sgmlbase}/%{name}-%{version}/
 
-cd $RPM_BUILD_ROOT%{sgmlbase}
+cd %{buildroot}%{sgmlbase}
 ln -s %{name}-%{version} %{name}
 
 ln -s %{name}-%{version}/pubtext/xml.dcl xml.dcl
@@ -108,13 +108,13 @@ ln -s %{name}-%{version}/pubtext/xml.soc xml.soc
 ln -s %{name}-%{version}/pubtext/html.dcl html.dcl
 ln -s %{name}-%{version}/pubtext/html.soc html.soc
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/sgml
-touch $RPM_BUILD_ROOT%{_sysconfdir}/sgml/dsssl-%{version}.cat \
- $RPM_BUILD_ROOT%{_sysconfdir}/sgml/dsssl.cat \
- $RPM_BUILD_ROOT%{_sysconfdir}/sgml/catalog
+mkdir -p %{buildroot}%{_sysconfdir}/sgml
+touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
+ %{buildroot}%{_sysconfdir}/sgml/dsssl.cat \
+ %{buildroot}%{_sysconfdir}/sgml/catalog
 
 # Remove unpackaged symlink
-rm -rf ${RPM_BUILD_ROOT}%{_datadir}/sgml/openjade
+rm -rf %{buildroot}%{_datadir}/sgml/openjade
 
 %post
 
@@ -180,7 +180,7 @@ fi
 %endif
 
 %clean 
-rm -rf $RPM_BUILD_ROOT 
+rm -rf %{buildroot} 
 
 %files
 %defattr(-,root,root)
