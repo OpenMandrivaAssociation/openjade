@@ -12,16 +12,19 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Url: http://openjade.sourceforge.net/
-Source: http://download.sourceforge.net/openjade/openjade-%{version}-%prerel.tar.bz2
+Source0: http://download.sourceforge.net/openjade/openjade-%{version}-%prerel.tar.bz2
 # (gb) 1.3.2-12mdk libtool fixes, don't bother with either aclocal nor autoconf
 # NOTE: this directly applies to configure
 Patch0: openjade-1.3.2-libtool.patch
 Patch1: openjade-gcc43.diff
 Patch2: openjade-deplibs.patch
 Patch3: openjade-ppc64.patch
+Patch4: openjade-getoptperl.patch
+Patch5: openjade-1.3.2-gcc46.patch
+#Patch6: sptrintf_long_openjade1.3.3.patch
+Patch7: openjade-nola.patch
 License: BSD
 Group: Publishing
-BuildRoot: %{_tmppath}/%{name}-buildroot
 Obsoletes: jade
 Provides: jade = %version-%release
 Requires: sgml-common >= 0.6.3-8mdk, %libname = %version-%release
@@ -57,6 +60,10 @@ Files for development from the openjade package.
 %patch1 -p1 -b .gcc43
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 cp config/configure.in .
