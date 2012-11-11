@@ -1,0 +1,35 @@
+diff -Naur openjade-1.3.3-pre1/doc/generic.htm openjade-1.3.3-pre1.oden/doc/generic.htm
+--- openjade-1.3.3-pre1/doc/generic.htm	1999-05-02 17:36:31.000000000 +0200
++++ openjade-1.3.3-pre1.oden/doc/generic.htm	2008-07-14 18:02:08.000000000 +0200
+@@ -1036,7 +1036,7 @@
+ #include "Boolean.h"
+ 
+ #include "ParserEventGeneratorKit.h"
+-#include &lt;iostream.h>
++#include &lt;iostream>
+ 
+ ostream &amp;operator<<<!>(ostream &amp;os, SGMLApplication::CharString s)
+ {
+diff -Naur openjade-1.3.3-pre1/jade/TeXFOTBuilder.cxx openjade-1.3.3-pre1.oden/jade/TeXFOTBuilder.cxx
+--- openjade-1.3.3-pre1/jade/TeXFOTBuilder.cxx	2002-01-15 11:35:37.000000000 +0100
++++ openjade-1.3.3-pre1.oden/jade/TeXFOTBuilder.cxx	2008-07-14 18:02:03.000000000 +0200
+@@ -20,7 +20,7 @@
+ #define OUTLINES
+ #undef DEBUG_OUTLINES
+ #ifdef DEBUG_OUTLINES
+-#include <iostream.h>
++#include <iostream>
+ #endif
+ #include <assert.h>
+ 
+diff -Naur openjade-1.3.3-pre1/style/MultiLineInlineNote.cxx openjade-1.3.3-pre1.oden/style/MultiLineInlineNote.cxx
+--- openjade-1.3.3-pre1/style/MultiLineInlineNote.cxx	2003-04-18 21:54:56.000000000 +0200
++++ openjade-1.3.3-pre1.oden/style/MultiLineInlineNote.cxx	2008-07-14 18:01:59.000000000 +0200
+@@ -1,6 +1,6 @@
+ 
+ #include "MultiLineInlineNote.h"
+-#include <iostream.h>
++#include <iostream>
+ 
+ #ifdef DSSSL_NAMESPACE
+ namespace DSSSL_NAMESPACE {
