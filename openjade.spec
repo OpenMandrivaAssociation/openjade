@@ -1,78 +1,68 @@
-%define name openjade
-%define version 1.3.3
-%define prerel pre1
-%define release %mkrel 0.%prerel.10
+%define prerel	pre1
 %define sgmlbase %{_datadir}/sgml
-%define major 0
+%define major	0
 %define libname %mklibname %{name} %{major}
-%define libnamedev %mklibname %{name} %{major} -d
+%define devname %mklibname %{name} %{major} -d
 
-Summary: Parser and tools for SGML + DSSSL
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Url: http://openjade.sourceforge.net/
-Source0: http://download.sourceforge.net/openjade/openjade-%{version}-%prerel.tar.bz2
+Summary:	Parser and tools for SGML + DSSSL
+Name:		openjade
+Version:	1.3.3
+Release:	0.%{prerel}.11
+License:	BSD
+Group:		Publishing
+Url:		http://openjade.sourceforge.net/
+Source0:	http://download.sourceforge.net/openjade/%{name}-%{version}-%{prerel}.tar.bz2
 # (gb) 1.3.2-12mdk libtool fixes, don't bother with either aclocal nor autoconf
 # NOTE: this directly applies to configure
-Patch0: openjade-1.3.2-libtool.patch
-Patch1: openjade-gcc43.diff
-Patch2: openjade-deplibs.patch
-Patch3: openjade-ppc64.patch
-Patch4: openjade-getoptperl.patch
-Patch5: openjade-1.3.2-gcc46.patch
-#Patch6: sptrintf_long_openjade1.3.3.patch
-Patch7: openjade-nola.patch
-License: BSD
-Group: Publishing
-Obsoletes: jade
-Provides: jade = %version-%release
-Requires: sgml-common >= 0.6.3-8mdk, %libname = %version-%release
-BuildRequires: OpenSP-devel
-Requires: OpenSP
+Patch0:		openjade-1.3.2-libtool.patch
+Patch1:		openjade-gcc43.diff
+Patch2:		openjade-deplibs.patch
+Patch3:		openjade-ppc64.patch
+Patch4:		openjade-getoptperl.patch
+Patch5:		openjade-1.3.2-gcc46.patch
+#Patch6:		sptrintf_long_openjade1.3.3.patch
+Patch7:		openjade-nola.patch
+
+BuildRequires:	opensp-devel
+Requires:	sgml-common
+Requires:	OpenSP
 
 %description
  Jade (James' DSSSL Engine) is an implementation of the DSSSL style
 language -- Document Style Semantics and Specification Language -- 
 an ISO standard for formatting SGML (and XML) documents.
 
-%package -n %libname
+%package -n %{libname}
 Group:          Publishing
 Summary:        Shared library files for openjade
 
-%description -n %libname
+%description -n %{libname}
 Shared library files for openjade.
 
-%package -n %libnamedev
+%package -n %{devname}
 Group:          Development/C
 Summary:        Development files for openjade
-Requires:       %name = %version-%release, %libname = %version-%release
-Provides:       lib%{name}-devel, openjade-devel
+Requires:       %{name} = %{version}-%release
+Requires:	%{libname} = %{version}-%release
+Provides:       %{name}-devel
 
-%description -n %libnamedev
+%description -n %{devname}
 Files for development from the openjade package.
 
-
 %prep
-
-%setup -q -n %name-%version-%prerel
-%patch0 -p1 -b .libtool
-%patch1 -p1 -b .gcc43
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%setup -qn %{name}-%{version}-%{prerel}
+%apply_patches
 
 %build
 cp config/configure.in .
 export CXXFLAGS="%optflags -fpermissive"
-%configure2_5x --enable-static --enable-http \
- --enable-default-catalog=%{_sysconfdir}/sgml/catalog  \
- --enable-default-search-path=%{sgmlbase} \
- --datadir=%{sgmlbase}/%{name}-%{version} \
- --enable-splibdir=%{_libdir}
+%configure2_5x \
+	--enable-static \
+	--enable-http \
+	--enable-default-catalog=%{_sysconfdir}/sgml/catalog  \
+	--enable-default-search-path=%{sgmlbase} \
+	--datadir=%{sgmlbase}/%{name}-%{version} \
+	--enable-splibdir=%{_libdir}
 
 %make
 
@@ -82,8 +72,6 @@ export CXXFLAGS="%optflags -fpermissive"
 # library API can be used.  It's an ugly kludge, and the best way
 # would be for James Clark to tell us what the appropriate list of
 # files to be included is.
-
-[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
 mkdir -p %{buildroot}{%{_libdir},%{_bindir},%{_includedir}/sp/generic,%{_includedir}/sp/include,%{_includedir}/sp/lib}
 mkdir -p %{buildroot}%{sgmlbase}/%{name}-%{version}/{pubtext,unicode}
@@ -124,7 +112,6 @@ touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
 rm -rf %{buildroot}%{_datadir}/sgml/openjade
 
 %post
-
 # remove openjade-1.3 catalog if referenced
 bads=`find %{_sysconfdir}/sgml -type f -exec grep -l %{name}-1.3 {} \;`
 for f in $bads; do 
@@ -159,7 +146,6 @@ if [ ! -L %{sgmlbase}/%{name} ]; then
 	ln -sf %{name}-%{version} %{name}
 fi
 
-
 %postun
 # Do not remove if upgrade
 if [ "$1" = "0" ]; then 
@@ -178,19 +164,7 @@ if [ "$1" = "0" ]; then
     fi
 fi
 
-
-%if %mdkversion < 200900
-%post   -p /sbin/ldconfig -n %libname
-%endif
-%if %mdkversion < 200900
-%postun -p /sbin/ldconfig -n %libname
-%endif
-
-%clean 
-rm -rf %{buildroot} 
-
 %files
-%defattr(-,root,root)
 %doc doc/ jadedoc/ dsssl/ pubtext/  README VERSION
 %ghost %config(noreplace) %{_sysconfdir}/sgml/dsssl*.cat
 %ghost %config(noreplace) %{_sysconfdir}/sgml/catalog
@@ -200,12 +174,11 @@ rm -rf %{buildroot}
 %{sgmlbase}/*.soc
 %{_mandir}/*/*
 
-%files -n %libname
-%defattr(-,root,root)
+%files -n %{libname}
 %{_libdir}/lib*.so.*
 
-%files -n %libnamedev
-%defattr(-,root,root)
+%files -n %{devname}
 %{_includedir}/sp
 %{_libdir}/lib*.so
 %{_libdir}/lib*a
+
