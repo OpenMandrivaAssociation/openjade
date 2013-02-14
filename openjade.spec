@@ -2,7 +2,7 @@
 %define sgmlbase %{_datadir}/sgml
 %define major	0
 %define libname %mklibname %{name} %{major}
-%define devname %mklibname %{name} %{major} -d
+%define devname %mklibname %{name} -d
 
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
@@ -45,6 +45,7 @@ Summary:        Development files for openjade
 Requires:       %{name} = %{version}-%release
 Requires:	%{libname} = %{version}-%release
 Provides:       %{name}-devel
+Obsoletes:	%{_lib}openjade0-devel < 1.3.3-0.pre1.11
 
 %description -n %{devname}
 Files for development from the openjade package.
