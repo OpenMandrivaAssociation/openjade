@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.11
+Release:	0.%{prerel}.12
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
@@ -22,6 +22,7 @@ Patch4:		openjade-getoptperl.patch
 Patch5:		openjade-1.3.2-gcc46.patch
 #Patch6:		sptrintf_long_openjade1.3.3.patch
 Patch7:		openjade-nola.patch
+Patch8:		openjade-1.3.3-fix-confusion-over-Char-type.patch
 
 BuildRequires:	opensp-devel
 Requires:	sgml-common
@@ -56,7 +57,7 @@ Files for development from the openjade package.
 
 %build
 cp config/configure.in .
-export CXXFLAGS="%optflags -fpermissive"
+export CXXFLAGS="%optflags -fpermissive -DSP_MULTI_BYTE=1"
 %configure2_5x \
 	--enable-static \
 	--enable-http \

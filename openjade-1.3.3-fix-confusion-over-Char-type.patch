@@ -1,0 +1,28 @@
+--- openjade-1.3.3-pre1/grove/Node.h.omv~	2013-06-20 15:20:44.973248365 +0200
++++ openjade-1.3.3-pre1/grove/Node.h	2013-06-20 15:22:51.433667392 +0200
+@@ -8,6 +8,7 @@
+ #endif
+ 
+ #include <stddef.h>
++#include <OpenSP/types.h>
+ #include "IList.h"
+ 
+ #ifdef SP_USE_DLL
+@@ -33,6 +34,7 @@
+ namespace GROVE_NAMESPACE {
+ #endif
+ 
++#if 0
+ #ifdef SP_MULTI_BYTE
+ #ifdef SP_WCHAR_T_USHORT
+ typedef wchar_t GroveChar;
+@@ -42,6 +44,9 @@ typedef unsigned int GroveChar;
+ #else /* not SP_MULTI_BYTE */
+ typedef unsigned char GroveChar;
+ #endif /* not SP_MULTI_BYTE */
++#else
++typedef OpenSP::Char GroveChar;
++#endif
+ 
+ 
+ class NodePtr;
