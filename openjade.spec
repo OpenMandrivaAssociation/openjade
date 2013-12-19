@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.14
+Release:	0.%{prerel}.15
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
@@ -100,21 +100,10 @@ cp dsssl/dsssl.dtd dsssl/style-sheet.dtd dsssl/fot.dtd %{buildroot}%{sgmlbase}/%
 cd %{buildroot}%{sgmlbase}
 ln -s %{name}-%{version} %{name}
 
-ln -s %{name}-%{version}/pubtext/xml.dcl xml.dcl
-ln -s %{name}-%{version}/pubtext/xml.soc xml.soc
-ln -s %{name}-%{version}/pubtext/html.dcl html.dcl
-ln -s %{name}-%{version}/pubtext/html.soc html.soc
-
 mkdir -p %{buildroot}%{_sysconfdir}/sgml
 touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
  %{buildroot}%{_sysconfdir}/sgml/dsssl.cat \
  %{buildroot}%{_sysconfdir}/sgml/catalog
-
-# Those are in sgml-common now
-rm -f	%{buildroot}%{_datadir}/sgml/html.soc \
-	%{buildroot}%{_datadir}/sgml/xml.dic \
-	%{buildroot}%{_datadir}/sgml/xml.soc \
-	%{buildroot}%{_datadir}/sgml/xml.dcl
 
 # Remove unpackaged symlink
 rm -rf %{buildroot}%{_datadir}/sgml/openjade
@@ -178,7 +167,6 @@ fi
 %ghost %config(noreplace) %{_sysconfdir}/sgml/catalog
 %{_bindir}/*
 %{sgmlbase}/%{name}-%{version}
-%{sgmlbase}/*.dcl
 %{_mandir}/*/*
 
 %files -n %{libname}
