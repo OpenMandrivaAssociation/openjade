@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.13
+Release:	0.%{prerel}.14
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
@@ -113,7 +113,8 @@ touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
 # Those are in sgml-common now
 rm -f	%{buildroot}%{_datadir}/sgml/html.soc \
 	%{buildroot}%{_datadir}/sgml/xml.dic \
-	%{buildroot}%{_datadir}/sgml/xml.soc
+	%{buildroot}%{_datadir}/sgml/xml.soc \
+	%{buildroot}%{_datadir}/sgml/xml.dcl
 
 # Remove unpackaged symlink
 rm -rf %{buildroot}%{_datadir}/sgml/openjade
