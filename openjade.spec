@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.15
+Release:	0.%{prerel}.16
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
@@ -100,6 +100,11 @@ cp dsssl/dsssl.dtd dsssl/style-sheet.dtd dsssl/fot.dtd %{buildroot}%{sgmlbase}/%
 cd %{buildroot}%{sgmlbase}
 ln -s %{name}-%{version} %{name}
 
+ln -s %{name}-%{version}/pubtext/xml.dcl xml.dcl
+ln -s %{name}-%{version}/pubtext/xml.soc xml.soc
+ln -s %{name}-%{version}/pubtext/html.dcl html.dcl
+ln -s %{name}-%{version}/pubtext/html.soc html.soc
+
 mkdir -p %{buildroot}%{_sysconfdir}/sgml
 touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
  %{buildroot}%{_sysconfdir}/sgml/dsssl.cat \
@@ -167,6 +172,8 @@ fi
 %ghost %config(noreplace) %{_sysconfdir}/sgml/catalog
 %{_bindir}/*
 %{sgmlbase}/%{name}-%{version}
+%{sgmlbase}/*.dcl
+%{sgmlbase}/*.soc
 %{_mandir}/*/*
 
 %files -n %{libname}
