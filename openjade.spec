@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.16
+Release:	0.%{prerel}.17
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
