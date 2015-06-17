@@ -58,7 +58,7 @@ Files for development from the openjade package.
 %build
 cp config/configure.in .
 export CXXFLAGS="%optflags -fpermissive -DSP_MULTI_BYTE=1"
-%configure2_5x \
+%configure \
 	--enable-static \
 	--enable-http \
 	--enable-default-catalog=%{_sysconfdir}/sgml/catalog  \
