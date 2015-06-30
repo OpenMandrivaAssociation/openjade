@@ -7,7 +7,7 @@
 Summary:	Parser and tools for SGML + DSSSL
 Name:		openjade
 Version:	1.3.3
-Release:	0.%{prerel}.17
+Release:	0.%{prerel}.18
 License:	BSD
 Group:		Publishing
 Url:		http://openjade.sourceforge.net/
@@ -25,7 +25,7 @@ Patch7:		openjade-nola.patch
 Patch8:		openjade-1.3.3-fix-confusion-over-Char-type.patch
 
 BuildRequires:	opensp-devel
-Requires:	sgml-common
+Requires(post,postun):	sgml-common
 Requires:	OpenSP
 
 %description
@@ -107,8 +107,7 @@ ln -s %{name}-%{version}/pubtext/html.soc html.soc
 
 mkdir -p %{buildroot}%{_sysconfdir}/sgml
 touch %{buildroot}%{_sysconfdir}/sgml/dsssl-%{version}.cat \
- %{buildroot}%{_sysconfdir}/sgml/dsssl.cat \
- %{buildroot}%{_sysconfdir}/sgml/catalog
+ %{buildroot}%{_sysconfdir}/sgml/dsssl.cat
 
 # Remove unpackaged symlink
 rm -rf %{buildroot}%{_datadir}/sgml/openjade
@@ -169,7 +168,6 @@ fi
 %files
 %doc doc/ jadedoc/ dsssl/ pubtext/  README VERSION
 %ghost %config(noreplace) %{_sysconfdir}/sgml/dsssl*.cat
-%ghost %config(noreplace) %{_sysconfdir}/sgml/catalog
 %{_bindir}/*
 %{sgmlbase}/%{name}-%{version}
 %{sgmlbase}/*.dcl
@@ -183,4 +181,3 @@ fi
 %{_includedir}/sp
 %{_libdir}/lib*.so
 %{_libdir}/lib*a
-
