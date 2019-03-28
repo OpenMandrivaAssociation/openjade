@@ -5,7 +5,7 @@
  linux-gnu*)
    case $host_cpu in
 -  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* )
-+  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* | x86_64* )
++  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* | x86_64* | arm* | aarch64* | riscv* )
      lt_cv_deplibs_check_method=pass_all ;;
    *)
      # glibc up to 2.1.1 does not perform some relocations on ARM
@@ -35,7 +35,7 @@
    hardcode_into_libs=yes
  
 +  case $host_cpu:$lt_cv_cc_64bit_output in
-+  powerpc64:yes | s390x:yes | sparc64:yes | x86_64:yes)
++  powerpc64:yes | s390x:yes | sparc64:yes | x86_64:yes | aarch64:yes)
 +    sys_lib_dlsearch_path_spec="/lib64 /usr/lib64 /usr/X11R6/lib64"
 +    sys_lib_search_path_spec="/lib64 /usr/lib64 /usr/local/lib64 /usr/X11R6/lib64"
 +    ;;

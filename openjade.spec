@@ -65,7 +65,8 @@ export CXXFLAGS="%optflags -fpermissive -DSP_MULTI_BYTE=1"
 	--enable-default-search-path=%{sgmlbase} \
 	--datadir=%{sgmlbase}/%{name}-%{version} \
 	--enable-splibdir=%{_libdir}
-
+# This is evil, but so is using prehistoric libtool ;)
+sed -i -e 's|-shared|-shared %{ldflags}|g' libtool
 %make
 
 %install
