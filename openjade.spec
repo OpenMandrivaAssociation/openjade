@@ -53,7 +53,7 @@ Files for development from the openjade package.
 
 %prep
 %setup -qn %{name}-%{version}-%{prerel}
-%apply_patches
+%autopatch -p1
 
 %build
 cp config/configure.in .
