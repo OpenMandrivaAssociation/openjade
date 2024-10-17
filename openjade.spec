@@ -10,7 +10,7 @@ Version:	1.3.3
 Release:	0.%{prerel}.18
 License:	BSD
 Group:		Publishing
-Url:		http://openjade.sourceforge.net/
+Url:		https://openjade.sourceforge.net/
 Source0:	http://download.sourceforge.net/openjade/%{name}-%{version}-%{prerel}.tar.bz2
 # (gb) 1.3.2-12mdk libtool fixes, don't bother with either aclocal nor autoconf
 # NOTE: this directly applies to configure
