@@ -24,6 +24,11 @@ Patch5:		openjade-1.3.2-gcc46.patch
 Patch7:		openjade-nola.patch
 Patch8:		openjade-1.3.3-fix-confusion-over-Char-type.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	opensp-devel
 Requires(post,postun):	sgml-common
 Requires:	OpenSP
